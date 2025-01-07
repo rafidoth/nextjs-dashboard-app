@@ -130,6 +130,6 @@ export async function GET() {
   } catch (error) {
     await client.sql`ROLLBACK`;
     console.error("Error seeding database:", error);
-    return Response.json({ error: error.message || "An unknown error occurred" }, { status: 500 });
+    return Response.json({ error: "An unknown error occurred" }, { status: 500 });
   }
 }
