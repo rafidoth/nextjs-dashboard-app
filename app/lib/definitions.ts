@@ -1,6 +1,9 @@
 // This file contains type definitions for your data.
 // It describes the shape of the data, and what data type each property should accept.
 // For simplicity of teaching, we're manually defining these types.
+
+import { Database } from "./supabase";
+
 // However, these types are generated automatically if you're using an ORM such as Prisma.
 export type User = {
   id: string;
@@ -31,18 +34,13 @@ export type Revenue = {
   revenue: number;
 };
 
-export type LatestInvoice = {
-  id: string;
-  name: string;
-  image_url: string;
-  email: string;
-  amount: string;
-};
-
+export type LatestInvoice = Database["public"]["Tables"]["invoices"]["Row"];
 // The database returns a number for amount, but we later format it to a string with the formatCurrency function
-export type LatestInvoiceRaw = Omit<LatestInvoice, 'amount'> & {
+export type LatestInvoiceWithCustomerInfo = {
   amount: number;
-};
+  id: string;
+  customers: Customer;
+}
 
 export type InvoicesTable = {
   id: string;
